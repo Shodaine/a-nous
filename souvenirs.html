@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nos souvenirs</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Jost:wght@400;500&display=swap">
+<style>
+:root{--bg:#fbf1ee;--ink:#3a1d2a;--mut:#8d6b78;--card:#fff;--acc:#c94f6d;--acc2:#e8a48f;--line:#f0d9d4;--sh:0 8px 30px rgba(120,40,70,.13);--serif:"Cormorant Garamond",Georgia,serif;--sans:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#150b12;--ink:#f7e6e1;--mut:#b99aa6;--card:#241621;--acc:#f0839d;--line:#3a2434;--sh:0 8px 30px rgba(0,0,0,.5)}}
+:root[data-theme="dark"]{--bg:#150b12;--ink:#f7e6e1;--mut:#b99aa6;--card:#241621;--acc:#f0839d;--line:#3a2434;--sh:0 8px 30px rgba(0,0,0,.5)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 12% 0,rgba(232,164,143,.28),transparent 42%),radial-gradient(circle at 92% 8%,rgba(201,79,109,.18),transparent 38%),var(--bg);background-attachment:fixed;color:var(--ink);font:400 16px/1.5 var(--sans)}
+.fl{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.fl span{position:absolute;bottom:-8%;color:var(--acc);opacity:0;animation:fly linear infinite}
+@keyframes fly{10%{opacity:.35}to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+.hero,.bar,main,footer{position:relative;z-index:1}
+.hero{text-align:center;padding:52px 20px 20px}
+.kick{margin:0;letter-spacing:.3em;text-transform:uppercase;font-size:.72rem;color:var(--mut)}
+h1{margin:6px 0 4px;font:italic 600 clamp(2.6rem,10vw,5rem)/1.05 var(--serif);background:linear-gradient(120deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.msg{max-width:34ch;margin:0 auto 14px;font:italic 500 1.25rem/1.35 var(--serif);color:var(--mut)}
+.pill{display:inline-block;margin:0 0 16px;padding:5px 16px;border-radius:99px;background:var(--card);box-shadow:var(--sh);font-weight:500;color:var(--acc)}
+.acts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.btn{font:500 .9rem var(--sans);padding:9px 16px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}.btn.p{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;border:0}
+.btn:disabled{opacity:.5}
+.o,.w{display:none}body.own .o{display:inline-block}body.write .w{display:inline-block}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:8px;overflow-x:auto;padding:12px 16px;margin-top:10px;scrollbar-width:none;justify-content:center}
+.bar:empty{display:none}
+.chip{flex:none;font:500 .85rem var(--sans);padding:7px 14px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--mut);cursor:pointer}
+.chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+#g{columns:3 230px;column-gap:14px;padding:8px 16px 30px;max-width:1200px;margin:0 auto}
+@media(max-width:560px){#g{columns:2;column-gap:10px}}
+.ph{position:relative;margin:0 0 14px;break-inside:avoid;border-radius:16px;overflow:hidden;background:var(--card);box-shadow:var(--sh);cursor:zoom-in;transition:transform .3s}
+.ph:hover{transform:translateY(-3px) rotate(-.4deg)}
+.ph img{display:block;width:100%;height:auto}
+.ph figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 12px 10px;color:#fff;font:italic 500 1.05rem/1.2 var(--serif);background:linear-gradient(transparent,rgba(30,8,18,.72));opacity:0;transition:opacity .3s}
+.ph figcaption small{display:block;font:400 .72rem var(--sans);opacity:.8;margin-top:2px}
+.ph:hover figcaption{opacity:1}@media(hover:none){.ph figcaption{opacity:1}}
+.hb{position:absolute;top:8px;right:8px;width:36px;height:36px;border:0;border-radius:50%;background:rgba(255,255,255,.78);color:#b9a3ab;font-size:18px;cursor:pointer;backdrop-filter:blur(6px)}
+.hb.on{color:#d93d63}
+.anim .ph{animation:rise .7s both;animation-delay:calc(var(--i)*55ms)}
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.97)}}
+.emp{text-align:center;color:var(--mut);font:italic 500 1.3rem var(--serif);padding:30px 20px}
+footer{text-align:center;color:var(--mut);font-size:.8rem;padding:10px 0 34px}
+#lb{position:fixed;inset:0;z-index:50;display:grid;grid-template-rows:minmax(0,1fr) auto;background:rgba(15,6,11,.95);padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);color:#fff}
+.st{position:relative;display:flex;min-height:0;padding:14px}
+#li{max-width:100%;max-height:100%;min-width:0;min-height:0;margin:auto;object-fit:contain;border-radius:10px;animation:fade .45s}
+@keyframes fade{from{opacity:0}}
+.nv,.x{position:absolute;border:0;border-radius:50%;width:44px;height:44px;background:rgba(255,255,255,.14);color:#fff;font-size:26px;cursor:pointer;z-index:2}
+.nv{top:50%;transform:translateY(-50%)}.l{left:8px}.r{right:8px}.x{top:10px;right:10px;font-size:18px}
+.cap{text-align:center;padding:6px 16px 18px}
+#lc{margin:0;font:italic 500 1.5rem/1.25 var(--serif)}#ld{opacity:.65}
+.cap .btn{background:rgba(255,255,255,.12);color:#fff;border-color:transparent;margin:10px 3px 0}
+#lh.on{color:#ff6b8b}
+.bh{position:absolute;left:50%;top:50%;font-size:34px;color:#ff6b8b;pointer-events:none;animation:bur 1s ease-out forwards}
+@keyframes bur{to{transform:translate(var(--x),-160px) scale(1.4);opacity:0}}
+dialog{border:0;border-radius:20px;background:var(--card);color:var(--ink);box-shadow:var(--sh);padding:22px;width:min(92vw,420px)}
+dialog.big{width:min(94vw,640px);max-height:86vh;overflow:auto}
+dialog::backdrop{background:rgba(20,8,14,.55)}
+dialog h2{margin:0 0 8px;font:italic 600 1.7rem var(--serif)}
+label{font-size:.82rem;color:var(--mut)}
+input,textarea{display:block;width:100%;font:inherit;padding:10px 12px;margin:4px 0 12px;border:1px solid var(--line);border-radius:12px;background:transparent;color:inherit}
+progress{width:100%;accent-color:var(--acc)}.row{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:6px}
+.note{font-size:.85rem;color:var(--mut);min-height:1.3em}
+.cal-head{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:10px}
+.cal-head b{font:italic 600 1.3rem var(--serif);text-transform:capitalize}
+.ib{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:transparent;color:inherit;font-size:16px;cursor:pointer;flex:none}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center}
+.cal-grid span{font-size:.68rem;color:var(--mut);padding:2px 0}
+.dy{position:relative;aspect-ratio:1;border:0;border-radius:10px;background:transparent;color:inherit;font:500 .82rem var(--sans);cursor:pointer}
+.dy:disabled{visibility:hidden;cursor:default}
+.dy.tod{box-shadow:inset 0 0 0 1px var(--acc)}
+.dy.sel{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff}
+.dy i{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--acc)}
+.dy.sel i{background:#fff}
+.dp{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.dp h3{margin:0 0 8px;font:italic 600 1.15rem var(--serif);text-transform:capitalize}
+.ev{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px dashed var(--line)}
+.ev div{min-width:0}.ev b{display:block;font-weight:500}.ev small{color:var(--mut)}
+.ev button{border:0;background:none;color:var(--mut);cursor:pointer;font-size:15px;flex:none}
+.dph{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.dph img{width:52px;height:52px;object-fit:cover;border-radius:8px;cursor:zoom-in}
+.evadd{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.evadd input{flex:1;min-width:120px;margin:0}
+.cm{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.15);text-align:left;max-height:150px;overflow:auto}
+.cmi{display:flex;justify-content:space-between;gap:8px;padding:5px 0;font-size:.92rem}
+.cmi button{border:0;background:none;color:inherit;opacity:.5;cursor:pointer;flex:none}
+.cmadd{display:flex;gap:6px;margin-top:8px}
+.cmadd input{flex:1;margin:0;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#fff}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.fl{display:none}}
+</style>
+</head>
+<body>
+<div class="fl" id="fl" aria-hidden="true"></div>
+<header class="hero">
+  <p class="kick">rien que pour toi ♡</p>
+  <h1 id="t">Nos souvenirs</h1>
+  <p class="msg" id="m"></p>
+  <p class="pill" id="c" hidden></p>
+  <div class="acts">
+    <button class="btn p" id="sl">▶ Diaporama</button>
+    <button class="btn" id="su">✨ Surprends-moi</button>
+    <button class="btn" id="calb">📅 Calendrier</button>
+    <button class="btn w" id="ad">＋ Photos</button>
+    <button class="btn w" id="st">⚙ Réglages</button>
+    <button class="btn" id="th" aria-label="Changer de thème">◐</button>
+  </div>
+</header>
+<nav class="bar" id="f"></nav>
+<main><div id="g"></div><p class="emp" id="e"></p></main>
+<footer>Fait avec ♥</footer>
+
+<div id="lb" hidden>
+  <div class="st">
+    <button class="x" id="lx" aria-label="Fermer">✕</button>
+    <button class="nv l" id="lp" aria-label="Précédente">‹</button>
+    <img id="li" alt="">
+    <button class="nv r" id="ln" aria-label="Suivante">›</button>
+  </div>
+  <div class="cap">
+    <p id="lc"></p><small id="ld"></small>
+    <div><button class="btn" id="lh">♥ Coup de cœur</button><button class="btn" id="ls">▶ Diaporama</button><button class="btn" id="le" hidden>✎ Modifier</button></div>
+    <div class="cm"><div id="cml"></div><div class="cmadd w"><input id="cmi" placeholder="Écris un petit mot…" maxlength="300"><button class="btn p" id="cma">➤</button></div></div>
+  </div>
+</div>
+
+<dialog id="up">
+  <h2>Ajouter des photos</h2>
+  <label>Photos</label><input type="file" id="fi" accept="image/*" multiple>
+  <label>Date (facultatif)</label><input type="date" id="adt">
+  <label>Album (facultatif)</label><input id="ai" list="al" placeholder="Voyages, Nous deux, Été…"><datalist id="al"></datalist>
+  <progress id="pb" value="0" max="1"></progress><p class="note" id="um"></p>
+  <div class="row"><button class="btn" id="uc">Fermer</button><button class="btn p" id="go">Envoyer</button></div>
+</dialog>
+
+<dialog id="ed">
+  <h2>Modifier la photo</h2>
+  <label>Petit mot</label><textarea id="ec" rows="3" placeholder="Un souvenir, une blague, un je t’aime…"></textarea>
+  <label>Album</label><input id="ea" list="al">
+  <label>Date (facultatif)</label><input type="date" id="edt">
+  <p class="note" id="em"></p>
+  <div class="row"><button class="btn" id="edel">Supprimer</button><button class="btn" id="ex">Annuler</button><button class="btn p" id="es">Enregistrer</button></div>
+</dialog>
+
+<dialog id="cf">
+  <h2>Réglages</h2>
+  <label>Titre</label><input id="ct" placeholder="Nos souvenirs">
+  <label>Petit message</label><textarea id="cm" rows="2" placeholder="Chaque photo est un petit bout de nous."></textarea>
+  <label>Ensemble depuis le</label><input type="date" id="cs">
+  <p class="note" id="cn"></p>
+  <div class="row"><button class="btn" id="cx">Annuler</button><button class="btn p" id="cy">Enregistrer</button></div>
+</dialog>
+
+<dialog id="cal" class="big">
+  <div class="cal-head"><button class="ib" id="cp" aria-label="Mois précédent">‹</button><b id="cly"></b><button class="ib" id="cnx" aria-label="Mois suivant">›</button></div>
+  <div class="cal-grid" id="calg"></div>
+  <div class="dp" id="dayp"></div>
+  <div class="row"><button class="btn" id="cclose">Fermer</button></div>
+</dialog>
+
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let photos=[],events=[],comments=[],list=[],cfg={},filter='all',favs=new Set(),isAdmin=false,canWrite=false,myId=null,loaded=false,note='',db,assets,col,evc,cm,unsubC=null,cur=-1,timer=null,calY=0,calM=0,selDate=null;
+try{favs=new Set(JSON.parse(localStorage.getItem('favs')||'[]'))}catch(e){}
+const saveFavs=()=>{try{localStorage.setItem('favs',JSON.stringify([...favs]))}catch(e){}};
+const src=p=>'/_blob/'+p.assetId;
+const mine=x=>isAdmin||(myId&&x.addedBy===myId);
+const fmt=d=>{if(!d)return'';const x=new Date(d+'T00:00:00');return isNaN(x)?'':x.toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})};
+const errm=e=>'Oups : '+((e&&(e.message||e.code))||'échec');
+
+$('#fl').innerHTML=Array.from({length:10},(_,i)=>`<span style="left:${i*10+Math.random()*8}%;font-size:${12+Math.random()*16}px;animation-duration:${9+Math.random()*8}s;animation-delay:${-Math.random()*12}s">♥</span>`).join('');
+document.body.classList.add('anim');setTimeout(()=>document.body.classList.remove('anim'),2400);
+$('#th').onclick=()=>{const r=document.documentElement,d=(r.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'))==='dark';r.dataset.theme=d?'light':'dark'};
+
+function head(){
+  $('#t').textContent=cfg.title||'Nos souvenirs';document.title=$('#t').textContent;
+  $('#m').textContent=cfg.message||'Chaque photo est un petit bout de nous.';
+  let d=-1;if(cfg.since){d=Math.floor((Date.now()-new Date(cfg.since+'T00:00:00'))/864e5)}
+  $('#c').hidden=!(d>=0);if(d>=0)$('#c').textContent='♡ '+d.toLocaleString('fr-FR')+' jours ensemble';
+}
+function chips(){
+  const al=[...new Set(photos.map(p=>p.album).filter(Boolean))];
+  if(filter.startsWith('a:')&&!al.includes(filter.slice(2)))filter='all';
+  $('#f').innerHTML=(photos.length?[['all','Toutes'],['fav','♡ Coups de cœur'],...al.map(a=>['a:'+a,a])]:[]).map(([k,l])=>`<button class="chip${k===filter?' on':''}" data-k="${esc(k)}">${esc(l)}</button>`).join('');
+  $('#al').innerHTML=al.map(a=>`<option value="${esc(a)}">`).join('');
+}
+function grid(){
+  list=photos.filter(p=>filter==='all'||(filter==='fav'?favs.has(p.id):p.album===filter.slice(2)));
+  $('#g').innerHTML=list.map((p,i)=>`<figure class="ph" style="--i:${Math.min(i,14)}" data-i="${i}"><img loading="lazy" src="${src(p)}" alt="${esc(p.caption||'Souvenir')}"><button class="hb${favs.has(p.id)?' on':''}" data-h="${p.id}" aria-label="Coup de cœur">♥</button>${p.caption||p.date?`<figcaption>${esc(p.caption||'')}${p.date?`<small>${esc(fmt(p.date))}</small>`:''}</figcaption>`:''}</figure>`).join('');
+  const e=$('#e');
+  e.textContent=note||(!loaded?'Chargement…':!photos.length?((canWrite||isAdmin)?'Ajoute ta première photo avec le bouton « ＋ Photos » ✨':'Les premiers souvenirs arrivent bientôt ♡'):!list.length?'Rien ici pour l’instant — touche un ♥ sur une photo pour la garder ici.':'');
+}
+$('#f').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;filter=b.dataset.k;chips();grid()};
+$('#g').onclick=e=>{
+  const h=e.target.closest('.hb');
+  if(h){e.stopPropagation();const id=h.dataset.h;favs.has(id)?favs.delete(id):favs.add(id);saveFavs();grid();return}
+  const f=e.target.closest('.ph');if(f)openLb(+f.dataset.i);
+};
+
+/* Lightbox */
+const lb=$('#lb');
+function show(){
+  const p=list[cur];if(!p)return;
+  const i=$('#li');i.style.animation='none';void i.offsetWidth;i.style.animation='';i.src=src(p);i.alt=p.caption||'';
+  $('#lc').textContent=p.caption||'';$('#ld').textContent=[fmt(p.date),p.album].filter(Boolean).join(' · ');
+  $('#lh').classList.toggle('on',favs.has(p.id));
+  $('#le').hidden=!mine(p);
+  subComments(p.id);
+  if(list.length>1)new Image().src=src(list[(cur+1)%list.length]);
+}
+function openLb(i){cur=i;lb.hidden=false;document.body.style.overflow='hidden';show()}
+function closeLb(){stopShow();if(unsubC){unsubC();unsubC=null}lb.hidden=true;document.body.style.overflow='';cur=-1}
+const step=d=>{if(!list.length)return;cur=(cur+d+list.length)%list.length;show()};
+function startShow(){stopShow();timer=setInterval(()=>step(1),4200);$('#ls').textContent='❚❚ Pause'}
+function stopShow(){if(timer)clearInterval(timer);timer=null;$('#ls').textContent='▶ Diaporama'}
+$('#lx').onclick=closeLb;$('#lp').onclick=()=>{stopShow();step(-1)};$('#ln').onclick=()=>{stopShow();step(1)};
+$('#ls').onclick=()=>timer?stopShow():startShow();
+$('#lh').onclick=()=>{const id=list[cur].id;favs.has(id)?favs.delete(id):favs.add(id);saveFavs();show();grid()};
+$('#li').ondblclick=()=>{const id=list[cur].id;favs.add(id);saveFavs();show();grid();
+  for(let k=0;k<8;k++){const s=document.createElement('span');s.className='bh';s.textContent='♥';s.style.setProperty('--x',(Math.random()*240-120)+'px');s.style.animationDelay=(k*70)+'ms';lb.appendChild(s);setTimeout(()=>s.remove(),1400)}};
+document.addEventListener('keydown',e=>{if(lb.hidden||document.querySelector('dialog[open]'))return;if(e.key==='ArrowRight')step(1);else if(e.key==='ArrowLeft')step(-1);else if(e.key==='Escape')closeLb()});
+let tx=0;lb.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+lb.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50){stopShow();step(d<0?1:-1)}});
+$('#sl').onclick=()=>{if(!list.length)return;openLb(0);startShow()};
+$('#su').onclick=()=>{if(list.length)openLb(Math.floor(Math.random()*list.length))};
+
+/* Commentaires */
+function subComments(pid){
+  if(unsubC){unsubC();unsubC=null}
+  comments=[];renderComments();
+  if(!cm)return;
+  unsubC=cm.where('photoId','==',pid).orderBy('createdAt','asc').onSnapshot(s=>{comments=s.docs.map(d=>({id:d.id,...d.data()}));renderComments()},()=>{});
+}
+function renderComments(){
+  $('#cml').innerHTML=comments.length?comments.map(c=>`<p class="cmi"><span>${esc(c.text)}</span>${mine(c)?`<button data-dc="${c.id}" aria-label="Supprimer">✕</button>`:''}</p>`).join(''):'<p class="note">Aucun petit mot pour l’instant.</p>';
+}
+async function addComment(){
+  const t=$('#cmi').value.trim();if(!t||!cm)return;
+  const p=list[cur];if(!p)return;
+  try{await cm.add({photoId:p.id,text:t,addedBy:myId||'',createdAt:Date.now()});$('#cmi').value=''}catch(e){alert(errm(e))}
+}
+$('#cml').onclick=e=>{const b=e.target.closest('[data-dc]');if(b&&cm)cm.doc(b.dataset.dc).delete().catch(()=>{})};
+$('#cma').onclick=addComment;
+$('#cmi').addEventListener('keydown',e=>{if(e.key==='Enter')addComment()});
+
+/* Gestion des photos */
+async function shrink(f){
+  const u=URL.createObjectURL(f);
+  try{
+    const im=await new Promise((ok,ko)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=ko;i.src=u});
+    const s=Math.min(1,1800/Math.max(im.naturalWidth,im.naturalHeight)),c=document.createElement('canvas');
+    c.width=Math.round(im.naturalWidth*s);c.height=Math.round(im.naturalHeight*s);
+    c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+    return await new Promise(ok=>c.toBlob(ok,'image/jpeg',.86));
+  }finally{URL.revokeObjectURL(u)}
+}
+$('#ad').onclick=()=>{$('#um').textContent='';$('#pb').value=0;$('#adt').value='';$('#up').showModal()};
+$('#uc').onclick=()=>$('#up').close();
+$('#go').onclick=async()=>{
+  if(!assets){$('#um').textContent='Les photos ne sont pas disponibles pour toi ici.';return}
+  const fs=[...$('#fi').files];if(!fs.length){$('#um').textContent='Choisis d’abord des photos.';return}
+  const al=$('#ai').value.trim(),dt=$('#adt').value||'';let n=0;$('#pb').max=fs.length;$('#pb').value=0;$('#go').disabled=true;$('#um').textContent='';
+  for(const f of fs){
+    try{
+      const a=await assets.upload(await shrink(f));
+      await col.add({assetId:a.id,caption:'',album:al,date:dt,addedBy:myId||'',createdAt:Date.now()});n++;
+    }catch(e){$('#um').textContent=errm(e)}
+    $('#pb').value=+$('#pb').value+1;
+  }
+  $('#go').disabled=false;$('#fi').value='';if(n)$('#um').textContent=n+' photo'+(n>1?'s ajoutées':' ajoutée')+' ♡ — ajoute un petit mot en les ouvrant.';
+};
+$('#le').onclick=()=>{
+  const p=list[cur];$('#ec').value=p.caption||'';$('#ea').value=p.album||'';$('#edt').value=p.date||'';$('#em').textContent='';
+  const b=$('#edel');delete b.dataset.s;b.textContent='Supprimer';$('#ed').showModal();
+};
+$('#ex').onclick=()=>$('#ed').close();
+$('#es').onclick=async()=>{
+  const p=list[cur];
+  try{await col.doc(p.id).update({caption:$('#ec').value.trim(),album:$('#ea').value.trim(),date:$('#edt').value||''});$('#ed').close()}catch(e){$('#em').textContent=errm(e)}
+};
+$('#edel').onclick=async e=>{
+  const b=e.currentTarget;if(!b.dataset.s){b.dataset.s=1;b.textContent='Vraiment supprimer ?';return}
+  const p=list[cur];
+  try{await col.doc(p.id).delete();try{await assets.delete(p.assetId)}catch(_){}$('#ed').close()}catch(x){$('#em').textContent=errm(x)}
+};
+$('#st').onclick=()=>{$('#ct').value=cfg.title||'';$('#cm').value=cfg.message||'';$('#cs').value=cfg.since||'';$('#cn').textContent='';$('#cf').showModal()};
+$('#cx').onclick=()=>$('#cf').close();
+$('#cy').onclick=async()=>{
+  try{await db.doc('settings/main').set({title:$('#ct').value.trim(),message:$('#cm').value.trim(),since:$('#cs').value||''});$('#cf').close()}catch(e){$('#cn').textContent=errm(e)}
+};
+
+/* Calendrier */
+function pad(n){return String(n).padStart(2,'0')}
+function keyOf(y,m,d){return y+'-'+pad(m+1)+'-'+pad(d)}
+function dateSet(){const s=new Set();photos.forEach(p=>p.date&&s.add(p.date));events.forEach(x=>x.date&&s.add(x.date));return s}
+function openCal(){const t=new Date();calY=t.getFullYear();calM=t.getMonth();selDate=null;$('#cal').showModal();renderCal()}
+function renderCal(){
+  const s=dateSet(),t=new Date();
+  $('#cly').textContent=new Date(calY,calM,1).toLocaleDateString('fr-FR',{month:'long',year:'numeric'});
+  const first=(new Date(calY,calM,1).getDay()+6)%7,n=new Date(calY,calM+1,0).getDate();
+  let h='<span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>';
+  for(let i=0;i<first;i++)h+='<button class="dy" disabled></button>';
+  for(let d=1;d<=n;d++){const k=keyOf(calY,calM,d),c=['dy'];
+    if(calY===t.getFullYear()&&calM===t.getMonth()&&d===t.getDate())c.push('tod');
+    if(k===selDate)c.push('sel');
+    h+=`<button class="${c.join(' ')}" data-k="${k}">${d}${s.has(k)?'<i></i>':''}</button>`}
+  $('#calg').innerHTML=h;
+  renderDayPanel();
+}
+function renderDayPanel(){
+  const box=$('#dayp');
+  if(!selDate){box.innerHTML='<p class="note">Touche un jour pour voir ou ajouter des souvenirs.</p>';return}
+  const evs=events.filter(x=>x.date===selDate),phs=photos.filter(p=>p.date===selDate);
+  let h=`<h3>${esc(fmt(selDate))}</h3>`;
+  h+=evs.map(x=>`<div class="ev"><div><b>${esc(x.title)}</b>${x.note?`<small>${esc(x.note)}</small>`:''}</div>${mine(x)?`<button data-de="${x.id}" aria-label="Supprimer">✕</button>`:''}</div>`).join('');
+  if(phs.length)h+=`<div class="dph">${phs.map((p,i)=>`<img data-dp="${i}" src="${src(p)}" alt="">`).join('')}</div>`;
+  if(!evs.length&&!phs.length)h+='<p class="note">Rien ce jour-là pour l’instant.</p>';
+  if(canWrite||isAdmin)h+='<div class="evadd"><input id="evt" placeholder="Titre (ex : RDV, anniversaire…)"><input id="evn" placeholder="Note (facultatif)"><button class="btn p" id="eva">Ajouter</button></div>';
+  box.innerHTML=h;
+}
+async function addEvent(){
+  if(!evc)return;
+  const t=$('#evt').value.trim();if(!t)return;
+  try{await evc.add({date:selDate,title:t,note:$('#evn').value.trim(),addedBy:myId||'',createdAt:Date.now()})}catch(e){alert(errm(e))}
+}
+$('#calb').onclick=openCal;$('#cclose').onclick=()=>$('#cal').close();
+$('#cp').onclick=()=>{calM--;if(calM<0){calM=11;calY--}renderCal()};
+$('#cnx').onclick=()=>{calM++;if(calM>11){calM=0;calY++}renderCal()};
+$('#calg').onclick=e=>{const b=e.target.closest('.dy[data-k]');if(!b)return;selDate=b.dataset.k;renderCal()};
+$('#dayp').onclick=e=>{
+  const de=e.target.closest('[data-de]');if(de){evc.doc(de.dataset.de).delete().catch(()=>{});return}
+  const dp=e.target.closest('[data-dp]');if(dp){list=photos.filter(p=>p.date===selDate);$('#cal').close();openLb(+dp.dataset.dp);return}
+  if(e.target.id==='eva')addEvent();
+};
+
+/* Démarrage */
+head();chips();grid();
+(async()=>{
+  try{db=await claude.use('db')}catch(e){db=null}
+  if(!db){note='Ce site est privé : ouvre-le depuis l’invitation que tu as reçue ♡';loaded=true;grid();return}
+  try{
+    const u=await claude.use('user');assets=await claude.use('assets');
+    if(u){myId=await u.id();isAdmin=!!(await u.canEdit());const w=await u.can('data.write');canWrite=w!==false}
+  }catch(e){}
+  document.body.classList.toggle('own',isAdmin);
+  document.body.classList.toggle('write',canWrite||isAdmin);
+  col=db.collection('photos');evc=db.collection('events');cm=db.collection('comments');
+  db.doc('settings/main').onSnapshot(s=>{cfg=s.exists?(s.data()||{}):{};head()},()=>{});
+  col.orderBy('date','desc').onSnapshot(s=>{
+    const id=cur>=0&&list[cur]?list[cur].id:null;
+    photos=s.docs.map(d=>({id:d.id,...d.data()}));loaded=true;chips();grid();
+    if(!lb.hidden){const k=list.findIndex(p=>p.id===id);k<0?closeLb():(cur=k,show())}
+    if($('#cal').open)renderCal();
+  },()=>{note='Impossible de charger les photos pour le moment.';loaded=true;grid()});
+  evc.onSnapshot(s=>{events=s.docs.map(d=>({id:d.id,...d.data()}));if($('#cal').open)renderCal()},()=>{});
+})();
+</script>
+</body>
+</html>
